@@ -7,7 +7,7 @@
  
 		<ul>
 			<c:forEach var="listValue" items="${moviesList}">
-				<li>${listValue}</li>
+				<li>${listValue.name}, ${listValue.releaseYear}, ${listValue.description}</li>
 			</c:forEach>
 		</ul>
  
