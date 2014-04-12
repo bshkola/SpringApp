@@ -6,14 +6,16 @@ public class Movie {
 	private String name;
 	private int releaseYear;
 	private String description;
+	private MovieCategory category;
 	
 	public Movie() {
 	}
 
-	public Movie(String name, int releaseYear, String description) {
+	public Movie(String name, int releaseYear, String description, MovieCategory category) {
 		this.name = name;
 		this.releaseYear = releaseYear;
 		this.description = description;
+		this.category = category;
 	}
 
 	public String getName() {
@@ -40,7 +42,11 @@ public class Movie {
 		this.description = description;
 	}
 
-	
-	
-	
+	public MovieCategory getCategory() {
+		return category;
+	}
+
+	public void setDescription(MovieCategory category) {
+		this.category = category;
+	}
 }
