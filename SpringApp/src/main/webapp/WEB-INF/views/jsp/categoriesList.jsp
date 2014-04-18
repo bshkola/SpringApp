@@ -6,10 +6,13 @@
  
 	<c:if test="${not empty categoriesList}">
 		<ul>
+			<li>
+				<a href="http://localhost:8080/SpringApp/movies/All categories">All categories</a>
+			</li>
 			<c:forEach var="categoryItem" items="${categoriesList}">
 				<li>
 					<c:url value="${categoryItem.name}" var="category" />
-					<a href="movies/${category}">${categoryItem.name}</a>
+					<a href="http://localhost:8080/SpringApp/movies/${categoryItem.name}">${categoryItem.name}</a>
 				</li>
 			</c:forEach>
 		</ul>

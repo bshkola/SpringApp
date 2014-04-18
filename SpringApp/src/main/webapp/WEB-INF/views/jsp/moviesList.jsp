@@ -6,12 +6,12 @@
  
  	<c:choose> 	
 		<c:when test="${not empty moviesList}">
-	 		<table>
+	 		<table border="1">
 	 			<thead>
 	 				<tr>
-	 					<td>Name</td>
-	 					<td>Release year</td>
-	 					<td>Description</td>
+	 					<td><b>Name</b></td>
+	 					<td><b>Release year</b></td>
+	 					<td><b>Description</b></td>
 	 				</tr>
 	 			</thead>
 		 		<c:forEach var="listValue" items="${moviesList}">
@@ -24,11 +24,11 @@
 	 		</table>
 		</c:when>
 		<c:otherwise>
-			You have no movies in this category
+			<h1>You have no movies in this category</h1>
 		</c:otherwise>
  	</c:choose>
  	<br>
-	<c:url value="mov" var="goBack"></c:url>
-	<a href="${goBack}">Go back to categories</a>
+	<c:url value="goBack" var="goBack"></c:url>
+	<a href="http://localhost:8080/SpringApp/movies/">Go back to categories</a>
 </body>
 </html>

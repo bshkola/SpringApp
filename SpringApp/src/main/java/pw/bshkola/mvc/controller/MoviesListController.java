@@ -21,8 +21,8 @@ public class MoviesListController {
 	static {
 		globalMoviesList.add(new Movie("Fast and Furious", 2001, "No description", new MovieCategory("Action")));
 		globalMoviesList.add(new Movie("Hobbit: Desolation of Smaug", 2013, "", new MovieCategory("Fantasy")));
-		globalMoviesList.add(new Movie("Inception", 2010, "Very cool film", new MovieCategory("Action")));
-		globalMoviesList.add(new Movie("Lord of the Rings: Return of the King", 2003, "Fantactic", new MovieCategory("Fantasy")));
+		globalMoviesList.add(new Movie("Inception", 2010, "Very cool movie", new MovieCategory("Action")));
+		globalMoviesList.add(new Movie("Lord of the Rings: Return of the King", 2003, "Fantastic", new MovieCategory("Fantasy")));
 		globalMoviesList.add(new Movie("The Dark Knight", 2008, "No", new MovieCategory("Action")));
 	}
 	
@@ -37,20 +37,25 @@ public class MoviesListController {
 		return "categoriesList";
 	}
 	
-	@RequestMapping(value = "{categoryName}", method = RequestMethod.GET)
-	public String showMoviesList(ModelMap model, @PathVariable String categoryName) {
+	@RequestMapping(value = "{selectedCategoryName}", method = RequestMethod.GET)
+	public String showMoviesList(ModelMap model, @PathVariable String selectedCategoryName) {
 		List<Movie> moviesList = new ArrayList<Movie>();
 		
-		for (Movie movie : globalMoviesList) {
-			if (movie.getCategory().getName().equals(categoryName)) {
-				moviesList.add(movie);
+		if (selectedCategoryName.equals("All categories")) {
+			moviesList = globalMoviesList;
+		}
+		else {
+			for (Movie movie : globalMoviesList) {
+				if (movie.getCategory().getName().equals(selectedCategoryName)) {
+					moviesList.add(movie);
+				}
 			}
 		}
-
-		model.addAttribute("categoryName", categoryName);
+		
+		model.addAttribute("categoryName", selectedCategoryName);
 		model.addAttribute("moviesList", moviesList);
 
 		return "moviesList";
 	}
-	
+
 }
