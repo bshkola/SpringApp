@@ -1,8 +1,8 @@
-package pw.bshkola.mvc.model;
-
+package pw.bshkola.model;
 
 public class Movie {
 
+	private int movieId;
 	private String name;
 	private int releaseYear;
 	private String description;
@@ -11,11 +11,20 @@ public class Movie {
 	public Movie() {
 	}
 
-	public Movie(String name, int releaseYear, String description, MovieCategory category) {
+	public Movie(int movieId, String name, int releaseYear, String description, MovieCategory category) {
+		this.setMovieId(movieId);
 		this.name = name;
 		this.releaseYear = releaseYear;
 		this.description = description;
 		this.category = category;
+	}
+
+	public int getMovieId() {
+		return movieId;
+	}
+	
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
 	}
 
 	public String getName() {
@@ -49,4 +58,5 @@ public class Movie {
 	public void setDescription(MovieCategory category) {
 		this.category = category;
 	}
+
 }
