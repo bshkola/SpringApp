@@ -29,6 +29,6 @@
  	</c:choose>
  	<br>
 	<c:url value="goBack" var="goBack"></c:url>
-	<a href="http://localhost:8080/SpringApp/movies/">Go back to categories</a>
+	<a href="http://localhost:8080/SpringApp/">Go back to categories</a>
 </body>
 </html>

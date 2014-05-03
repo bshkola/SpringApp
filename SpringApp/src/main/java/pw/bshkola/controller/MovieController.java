@@ -9,33 +9,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import pw.bshkola.model.service.CategoryService;
 import pw.bshkola.model.service.MovieService;
-import pw.bshkola.model.service.model.WebCategory;
 import pw.bshkola.model.service.model.WebMovie;
 
 @Controller
-@RequestMapping(value="/movies")
-public class MoviesListController {
+@RequestMapping(value = "/movies")
+public class MovieController {
 	
-	private static final String CATEGORIES_LIST = "categoriesList";
 	private static final String MOVIES_LIST = "moviesList";
-	
-	@Autowired
-	private CategoryService categoryService;
 	
 	@Autowired
 	private MovieService movieService;
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public String showCategoriesList(ModelMap model) {
-		
-		List<WebCategory> categoriesList = categoryService.findAll();
-		model.addAttribute(CATEGORIES_LIST, categoriesList);
-		
-		return "categoriesList";
-	}
-
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String showMoviesList(ModelMap model) {
 
