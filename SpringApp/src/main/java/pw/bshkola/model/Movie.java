@@ -71,10 +71,6 @@ public class Movie {
 		this.description = description;
 	}
 
-	public void setDescription(Category category) {
-		this.category = category;
-	}
-
 	public Category getCategory() {
 		return category;
 	}
