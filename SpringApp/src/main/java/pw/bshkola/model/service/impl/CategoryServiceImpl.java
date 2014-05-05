@@ -34,14 +34,17 @@ public class CategoryServiceImpl implements CategoryService {
 
 
 	@Override
-	public void save(WebCategory object) throws TransactionRollbackException {
-		// TODO Auto-generated method stub
-		
+	@Transactional(rollbackFor = TransactionRollbackException.class)
+	public void save(WebCategory webCategory) throws TransactionRollbackException {
+		Category category = new Category();
+		convertFromWeb(webCategory, category);
+		categoryDao.save(category);
 	}
 
 
 
 	@Override
+	@Transactional(rollbackFor = TransactionRollbackException.class)
 	public void saveOrUpdate(WebCategory object)
 			throws TransactionRollbackException {
 		// TODO Auto-generated method stub
@@ -51,17 +54,30 @@ public class CategoryServiceImpl implements CategoryService {
 
 
 	@Override
-	public void update(WebCategory object) throws TransactionRollbackException {
-		// TODO Auto-generated method stub
-		
+	@Transactional(rollbackFor = TransactionRollbackException.class)
+	public void update(WebCategory webCategory) throws TransactionRollbackException {
+		Category category = new Category();
+		convertFromWeb(webCategory, category);
+		categoryDao.update(category);
 	}
 
 
 
 	@Override
-	public void delete(WebCategory object) throws TransactionRollbackException {
-		// TODO Auto-generated method stub
-		
+	@Transactional(rollbackFor = TransactionRollbackException.class)
+	public void delete(WebCategory webCategory) throws TransactionRollbackException {
+		Category category = new Category();
+		convertFromWeb(webCategory, category);
+		categoryDao.delete(category);		
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public WebCategory findById(Integer id) {
+		Category category = categoryDao.findById(id);
+		WebCategory webCategory = new WebCategory();
+		convertToWeb(category, webCategory);
+		return webCategory;
 	}
 	
 	protected void convertToWeb(Category category, WebCategory webCategory) {
@@ -69,6 +85,11 @@ public class CategoryServiceImpl implements CategoryService {
 			webCategory.setCategoryId(category.getCategoryId());
 			webCategory.setName(category.getName());
 		}
+	}
+	
+	protected void convertFromWeb(WebCategory webCategory, Category category) {
+		category.setCategoryId(webCategory.getCategoryId());
+		category.setName(webCategory.getName());
 	}
 
 }

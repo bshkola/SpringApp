@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import pw.bshkola.model.Category;
+import pw.bshkola.model.service.exceptions.TransactionRollbackException;
 
 @Component("categoryDao")
 @SuppressWarnings("unchecked")
@@ -27,5 +28,30 @@ public class CategoryDao {
 		}
 		return list;
 	}
+
+	public void save(Category category) throws TransactionRollbackException {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(category);
+	}
+
+	public void update(Category category) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(category);
+	}
 	
+	public void updateOrUpdate(Category category) {
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(category);
+	}
+	
+	public void delete(Category category) {
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(category);
+	}
+	
+	public Category findById(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		return (Category) session.get(Category.class, id);
+	}
+
 }
