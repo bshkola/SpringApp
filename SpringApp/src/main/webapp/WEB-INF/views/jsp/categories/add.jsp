@@ -22,6 +22,7 @@
 <body>
 	<h1>Add category page</h1>
 	<form:form method="POST" action="add" commandName="category">
+		<form:hidden path="categoryId"/>
 		<form:errors path="*" cssClass="errorblock" element="div" />
 		<table>
 			<tr>

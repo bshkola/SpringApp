@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import pw.bshkola.form.CategoryForm;
 import pw.bshkola.model.service.CategoryService;
 import pw.bshkola.model.service.exceptions.TransactionRollbackException;
 import pw.bshkola.model.service.model.WebCategory;
@@ -31,6 +32,9 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 	
+	@Autowired
+	private CategoryForm categoryForm;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showCategoriesList(ModelMap model) {
 		
@@ -43,14 +47,15 @@ public class CategoryController {
 	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public String addCategory(ModelMap model) {
 
-		WebCategory category = new WebCategory();
-		model.addAttribute("category", category);
+		categoryForm.clear();
+		categoryForm.setCategoryId(0);
+		model.addAttribute("category", categoryForm);
 		
 		return CATEGORIES_LIST_ADD_JSP;
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String addCategorySuccess(ModelMap model, @ModelAttribute @Valid WebCategory category, BindingResult result) {
+	public String addCategorySuccess(ModelMap model, @ModelAttribute @Valid CategoryForm category, BindingResult result) {
 		
 		if (result.hasErrors()) {
 			model.addAttribute("category", category);
@@ -59,7 +64,11 @@ public class CategoryController {
 		}
 		
 		try {
-			categoryService.save(category);
+			WebCategory webCategory = new WebCategory();
+			webCategory.setCategoryId(category.getCategoryId());
+			webCategory.setName(category.getName());
+			
+			categoryService.save(webCategory);
 		} catch (TransactionRollbackException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -72,15 +81,23 @@ public class CategoryController {
 	public String editCategory(ModelMap model, @PathVariable Integer category_id) {
 		
 		WebCategory category = categoryService.findById(category_id);
-		model.addAttribute("category", category);
+		categoryForm.clear();
+		categoryForm.setCategoryId(category.getCategoryId());
+		categoryForm.setName(category.getName());
+		
+		model.addAttribute("category", categoryForm);
 		return CATEGORIES_LIST_EDIT_JSP;
 	}
 	
 	@RequestMapping(value = "edit/{category_id}", method = RequestMethod.POST)
-	public String editCategorySuccess(ModelMap model, @ModelAttribute WebCategory category, @PathVariable Integer category_id) {
+	public String editCategorySuccess(ModelMap model, @ModelAttribute CategoryForm category, @PathVariable Integer category_id) {
 		
 		try {
-			categoryService.update(category);
+			WebCategory webCategory = new WebCategory();
+			webCategory.setCategoryId(category.getCategoryId());
+			webCategory.setName(category.getName());
+			
+			categoryService.update(webCategory);
 		} catch (TransactionRollbackException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,15 +109,23 @@ public class CategoryController {
 	public String deleteCategory(ModelMap model, @PathVariable Integer category_id) {
 		
 		WebCategory category = categoryService.findById(category_id);
-		model.addAttribute("category", category);
+		categoryForm.clear();
+		categoryForm.setCategoryId(category.getCategoryId());
+		categoryForm.setName(category.getName());
+		
+		model.addAttribute("category", categoryForm);
 		return CATEGORIES_LIST_DELETE_JSP;
 	}
 	
 	@RequestMapping(value = "delete/{category_id}", method = RequestMethod.POST)
-	public String deleteCategorySuccess(ModelMap model, @ModelAttribute WebCategory category, @PathVariable Integer category_id) {
+	public String deleteCategorySuccess(ModelMap model, @ModelAttribute CategoryForm category, @PathVariable Integer category_id) {
 		
 		try {
-			categoryService.delete(category);
+			WebCategory webCategory = new WebCategory();
+			webCategory.setCategoryId(category.getCategoryId());
+			webCategory.setName(category.getName());
+			
+			categoryService.delete(webCategory);
 		} catch (TransactionRollbackException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
