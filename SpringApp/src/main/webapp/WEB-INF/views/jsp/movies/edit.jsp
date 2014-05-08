@@ -3,7 +3,7 @@
 
 <html>
 <body>
-	<form:form method="POST" action="add" commandName="movieForm">
+	<form:form method="POST" action="" commandName="movieForm">
 		<form:hidden path="movieId"/>
 		<fieldset>
 			<legend>New movie</legend>
@@ -39,9 +39,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" value="Add category"
-							${empty categories ? 'disabled="disabled"' : ''}
-						/>
+						<input type="submit" value="Edit category"/>
 					</td>
 				</tr>			
 			</table>

@@ -35,28 +35,36 @@ public class MovieServiceImpl implements MovieService {
 	}
 	
 	@Override
-	public void save(WebMovie object) throws TransactionRollbackException {
-		// TODO Auto-generated method stub
-		
+	@Transactional(rollbackFor = TransactionRollbackException.class)
+	public void save(WebMovie webMovie) throws TransactionRollbackException {
+		Movie movie = new Movie();
+		convertFromWeb(webMovie, movie);
+		movieDao.save(movie);
 	}
 
 	@Override
-	public void saveOrUpdate(WebMovie object)
+	@Transactional(rollbackFor = TransactionRollbackException.class)
+	public void saveOrUpdate(WebMovie webMovie)
 			throws TransactionRollbackException {
-		// TODO Auto-generated method stub
-		
+		Movie movie = new Movie();
+		convertFromWeb(webMovie, movie);
+		movieDao.saveOrUpdate(movie);		
 	}
 
 	@Override
-	public void update(WebMovie object) throws TransactionRollbackException {
-		// TODO Auto-generated method stub
-		
+	@Transactional(rollbackFor = TransactionRollbackException.class)
+	public void update(WebMovie webMovie) throws TransactionRollbackException {
+		Movie movie = new Movie();
+		convertFromWeb(webMovie, movie);
+		movieDao.update(movie);		
 	}
 
 	@Override
-	public void delete(WebMovie object) throws TransactionRollbackException {
-		// TODO Auto-generated method stub
-		
+	@Transactional(rollbackFor = TransactionRollbackException.class)
+	public void delete(WebMovie webMovie) throws TransactionRollbackException {
+		Movie movie = new Movie();
+		convertFromWeb(webMovie, movie);
+		movieDao.delete(movie);		
 	}
 
 	@Override
@@ -72,6 +80,16 @@ public class MovieServiceImpl implements MovieService {
 		return webMovieList;
 	}
 	
+	@Override
+	@Transactional(rollbackFor = TransactionRollbackException.class)
+	public WebMovie findById(int movieId) {
+		Movie movie = movieDao.findById(movieId);
+		WebMovie webMovie = new WebMovie();
+		convertToWeb(movie, webMovie);
+		
+		return webMovie;
+	}
+	
 	protected void convertToWeb(Movie movie, WebMovie webMovie) {
 		if (movie != null) {
 			webMovie.setMovieId(movie.getMovieId());
@@ -82,6 +100,21 @@ public class MovieServiceImpl implements MovieService {
 			Category category = movie.getCategory();
 			webCategory.setCategoryId(category.getCategoryId());
 			webCategory.setName(category.getName());
+			webMovie.setCategory(webCategory);
+		}
+	}
+	
+	protected void convertFromWeb(WebMovie webMovie, Movie movie) {
+		if (webMovie != null) {
+			movie.setMovieId(webMovie.getMovieId());
+			movie.setName(webMovie.getName());
+			movie.setReleaseYear(webMovie.getReleaseYear());
+			movie.setDescription(webMovie.getDescription());
+			Category category = new Category();
+			WebCategory webCategory = webMovie.getCategory();
+			category.setCategoryId(webCategory.getCategoryId());
+			category.setName(webCategory.getName());
+			movie.setCategory(category);
 		}
 	}
 

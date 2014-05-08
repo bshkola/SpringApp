@@ -1,19 +1,21 @@
-package pw.bshkola.model.service.model;
+package pw.bshkola.form;
 
+import org.springframework.stereotype.Component;
 
-public class WebMovie {
+@Component("movieForm")
+public class MovieForm {
 	
-	private int movieId;
+	private Integer movieId;
 	private String name;
-	private int releaseYear;
+	private Integer releaseYear;
 	private String description;
-	private WebCategory category;
+	private Integer category;
 	
-	public int getMovieId() {
+	public Integer getMovieId() {
 		return movieId;
 	}
 	
-	public void setMovieId(int movieId) {
+	public void setMovieId(Integer movieId) {
 		this.movieId = movieId;
 	}
 
@@ -25,7 +27,7 @@ public class WebMovie {
 		this.name = name;
 	}
 
-	public int getReleaseYear() {
+	public Integer getReleaseYear() {
 		return releaseYear;
 	}
 
@@ -41,17 +43,25 @@ public class WebMovie {
 		this.description = description;
 	}
 
-	public WebCategory getCategory() {
+	public Integer getCategory() {
 		return category;
 	}
 
-	public void setCategory(WebCategory category) {
+	public void setCategory(Integer category) {
 		this.category = category;
 	}
 
 	@Override
 	public String toString() {
 		return name + "(" + releaseYear + "), desc: " + description;
+	}
+	
+	public void clear() {
+		setMovieId(null);
+		setName(null);
+		setReleaseYear(null);
+		setDescription(null);
+		setCategory(null);
 	}
 	
 }

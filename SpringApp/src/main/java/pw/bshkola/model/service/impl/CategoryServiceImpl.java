@@ -68,7 +68,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public void delete(WebCategory webCategory) throws TransactionRollbackException {
 		Category category = new Category();
 		convertFromWeb(webCategory, category);
-		categoryDao.delete(category);		
+		categoryDao.delete(category);
 	}
 	
 	@Override

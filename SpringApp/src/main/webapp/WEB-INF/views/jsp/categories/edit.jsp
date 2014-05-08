@@ -5,6 +5,7 @@
 <body>
 	<h1>Edit category page</h1>
 	<form:form method="POST" action="" commandName="category">
+		<form:hidden path="categoryId"/>
 		<table>
 			<tr>
 				<td><form:label path="name">Name:</form:label></td>

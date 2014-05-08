@@ -20,7 +20,6 @@ public class MovieDao {
 	private static final String ALL_QUERY = "from Movie m order by m.name";
 	private static final String CATEGORY_NAME_QUERY = "from Movie m where m.category.name = :category_name order by m.name";
 	
-	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -44,6 +43,31 @@ public class MovieDao {
 			return new ArrayList<Movie>();
 		}
 		return movies;
+	}
+	
+	public Movie findById(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		return (Movie) session.get(Movie.class, id);
+	}
+
+	public void save(Movie movie) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(movie);
+	}
+
+	public void saveOrUpdate(Movie movie) {
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(movie);
+	}
+
+	public void update(Movie movie) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(movie);
+	}
+
+	public void delete(Movie movie) {
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(movie);
 	}
 	
 }

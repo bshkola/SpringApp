@@ -5,6 +5,7 @@
 <body>
 	<h1>Delete category page</h1>
 	<form:form method="POST" commandName="category">
+		<form:hidden path="categoryId"/>
 		<table>
 			<tr>
 				<td><form:label path="name">Name:</form:label></td>

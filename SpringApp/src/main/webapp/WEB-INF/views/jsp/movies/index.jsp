@@ -12,13 +12,21 @@
 	 					<td><b>Name</b></td>
 	 					<td><b>Release year</b></td>
 	 					<td><b>Description</b></td>
+	 					<td></td>
+	 					<td></td>
 	 				</tr>
 	 			</thead>
-		 		<c:forEach var="listValue" items="${moviesList}">
+		 		<c:forEach var="movieItem" items="${moviesList}">
 					<tr>
-						<td>${listValue.name}</td>
-						<td>${listValue.releaseYear}</td>
-						<td>${listValue.description}</td>
+						<td>${movieItem.name}</td>
+						<td>${movieItem.releaseYear}</td>
+						<td>${movieItem.description}</td>
+						<td>
+							<a href="http://localhost:8080/SpringApp/movies/edit/${movieItem.movieId}">edit</a>
+						</td>
+						<td>
+							<a href="http://localhost:8080/SpringApp/movies/delete/${movieItem.movieId}">delete</a>
+						</td>
 					</tr>
 				</c:forEach>		
 	 		</table>

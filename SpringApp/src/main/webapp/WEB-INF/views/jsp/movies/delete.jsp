@@ -3,45 +3,35 @@
 
 <html>
 <body>
-	<form:form method="POST" action="add" commandName="movieForm">
-		<form:hidden path="movieId"/>
+	<form:form method="POST" action="" commandName="movieForm">
 		<fieldset>
-			<legend>New movie</legend>
+			<legend>Movie to delete</legend>
 			<table>
 				<tr>
 					<td><form:label path="name">Name:</form:label></td>
-					<td><form:input path="name"/></td>
+					<td><form:input path="name" disabled="true"/></td>
 				</tr>	
 				<tr>
 					<td><form:label path="releaseYear">Year:</form:label></td>
-					<td><form:input path="releaseYear"/></td>
+					<td><form:input path="releaseYear" disabled="true"/></td>
 				</tr>
 				<tr>
 					<td><form:label path="description">Description:</form:label></td>
-					<td><form:textarea path="description" cols="75" rows="5"/></td>
+					<td><form:textarea path="description" cols="75" rows="5" disabled="true"/></td>
 				</tr>
 				<tr>
 					<td>
 						<form:label path="category">Category:</form:label>
 					</td>
 					<td>
-						<c:choose>
-							<c:when test="${empty categories}">
-								Add category first
-							</c:when>
-							<c:otherwise>
-								<form:select path="category" id="category" class="w300">
-									<form:options items="${categories}" itemLabel="name" itemValue="categoryId"/>
-								</form:select>
-							</c:otherwise>
-						</c:choose>
+						<form:select path="category" id="category" disabled="true">
+							<form:options items="${categories}" itemLabel="name" itemValue="categoryId"/>
+						</form:select>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" value="Add category"
-							${empty categories ? 'disabled="disabled"' : ''}
-						/>
+						<input type="submit" value="Delete movie"/>
 					</td>
 				</tr>			
 			</table>
