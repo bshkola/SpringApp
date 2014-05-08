@@ -1,9 +1,13 @@
 package pw.bshkola.model.service.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 
 public class WebCategory {
 
 	private int categoryId;
+	
+	@NotBlank
 	private String name;
 	
 	public int getCategoryId() {

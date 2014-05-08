@@ -2,9 +2,12 @@ package pw.bshkola.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,7 +77,16 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String addMovieSuccess(ModelMap model, @ModelAttribute MovieForm movie) {
+	public String addMovieSuccess(ModelMap model, @ModelAttribute @Valid MovieForm movie, BindingResult result) {
+		
+		if (result.hasErrors()) {
+			model.addAttribute("movieForm", movie);
+			
+			List<WebCategory> categoriesList = categoryService.findAll();
+			model.addAttribute("categories", categoriesList);
+			
+			return MOVIES_LIST_ADD_JSP;
+		}
 		
 		try {
 			WebMovie webMovie = new WebMovie();

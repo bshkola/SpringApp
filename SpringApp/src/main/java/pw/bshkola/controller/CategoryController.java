@@ -2,9 +2,12 @@ package pw.bshkola.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +50,13 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String addCategorySuccess(ModelMap model, @ModelAttribute WebCategory category) {
+	public String addCategorySuccess(ModelMap model, @ModelAttribute @Valid WebCategory category, BindingResult result) {
+		
+		if (result.hasErrors()) {
+			model.addAttribute("category", category);
+
+			return CATEGORIES_LIST_ADD_JSP;
+		}
 		
 		try {
 			categoryService.save(category);

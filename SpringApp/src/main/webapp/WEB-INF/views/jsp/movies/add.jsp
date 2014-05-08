@@ -2,19 +2,37 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <html>
+
+<style>
+.error {
+	color: #ff0000;
+}
+ 
+.errorblock {
+	color: #000;
+	background-color: #ffEEEE;
+	border: 3px solid #ff0000;
+	padding: 8px;
+	margin: 16px;
+}
+</style>
+
 <body>
 	<form:form method="POST" action="add" commandName="movieForm">
 		<form:hidden path="movieId"/>
 		<fieldset>
 			<legend>New movie</legend>
+			<form:errors path="*" cssClass="errorblock" element="div" />
 			<table>
 				<tr>
 					<td><form:label path="name">Name:</form:label></td>
 					<td><form:input path="name"/></td>
+					<td><form:errors path="name" cssClass="error"/> </td>
 				</tr>	
 				<tr>
 					<td><form:label path="releaseYear">Year:</form:label></td>
 					<td><form:input path="releaseYear"/></td>
+					<td><form:errors path="releaseYear" cssClass="error"/> </td>
 				</tr>
 				<tr>
 					<td><form:label path="description">Description:</form:label></td>

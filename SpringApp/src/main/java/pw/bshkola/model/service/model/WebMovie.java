@@ -1,6 +1,5 @@
 package pw.bshkola.model.service.model;
 
-
 public class WebMovie {
 	
 	private int movieId;
