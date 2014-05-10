@@ -1,18 +1,12 @@
 package pw.bshkola.form;
 
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 import org.springframework.stereotype.Component;
 
 @Component("movieForm")
 public class MovieForm {
 	
 	private Integer movieId;
-	
-	@NotBlank
 	private String name;
-	
-	@Range(min = 1900, max = 2030)
 	private Integer releaseYear;
 	private String description;
 	private Integer category;

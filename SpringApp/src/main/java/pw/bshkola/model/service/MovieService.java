@@ -9,5 +9,7 @@ public interface MovieService extends Service<WebMovie>{
 	public List<WebMovie> findAllByCategoryName(String name);
 
 	public WebMovie findById(int movieId);
+
+	public WebMovie findByName(String name);
 	
 }

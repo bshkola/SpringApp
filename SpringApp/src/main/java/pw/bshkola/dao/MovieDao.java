@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import pw.bshkola.model.Category;
 import pw.bshkola.model.Movie;
 
 @SuppressWarnings("unchecked")
@@ -16,9 +17,11 @@ import pw.bshkola.model.Movie;
 public class MovieDao {
 
 	private static final String CATEGORY_NAME = "category_name";
+	private static final String NAME = "name";
 
 	private static final String ALL_QUERY = "from Movie m order by m.name";
 	private static final String CATEGORY_NAME_QUERY = "from Movie m where m.category.name = :category_name order by m.name";
+	private static final String NAME_QUERY = "from Movie m where m.name = :name";
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -68,6 +71,17 @@ public class MovieDao {
 	public void delete(Movie movie) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(movie);
+	}
+
+	public Movie findByName(String name) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(NAME_QUERY);
+		query.setParameter(NAME, name);
+		List<Movie> list = query.list();
+		if (list != null && list.size() == 1) {
+			return list.get(0);
+		}
+		return null;
 	}
 	
 }

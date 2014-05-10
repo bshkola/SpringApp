@@ -90,6 +90,15 @@ public class MovieServiceImpl implements MovieService {
 		return webMovie;
 	}
 	
+	@Override
+	@Transactional(rollbackFor = TransactionRollbackException.class)
+	public WebMovie findByName(String name) {
+		WebMovie webMovie = new WebMovie();
+		Movie movie = movieDao.findByName(name);
+		convertToWeb(movie, webMovie);
+		return webMovie;
+	}
+	
 	protected void convertToWeb(Movie movie, WebMovie webMovie) {
 		if (movie != null) {
 			webMovie.setMovieId(movie.getMovieId());

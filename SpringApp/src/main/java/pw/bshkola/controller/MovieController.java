@@ -19,6 +19,7 @@ import pw.bshkola.model.service.MovieService;
 import pw.bshkola.model.service.exceptions.TransactionRollbackException;
 import pw.bshkola.model.service.model.WebCategory;
 import pw.bshkola.model.service.model.WebMovie;
+import pw.bshkola.validator.MovieValidator;
 
 @Controller
 @RequestMapping(value = "/movies")
@@ -40,6 +41,9 @@ public class MovieController {
 	
 	@Autowired
 	private MovieForm movieForm;
+	
+	@Autowired
+	private MovieValidator movieValidator;
 	
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String showMoviesList(ModelMap model) {
@@ -79,6 +83,7 @@ public class MovieController {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public String addMovieSuccess(ModelMap model, @ModelAttribute @Valid MovieForm movie, BindingResult result) {
 		
+		movieValidator.validate(movie, result);
 		if (result.hasErrors()) {
 			model.addAttribute("movieForm", movie);
 			
@@ -126,8 +131,16 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value = "edit/{movieId}", method = RequestMethod.POST)
-	public String addMovieSuccess(ModelMap model, @ModelAttribute MovieForm movie, @PathVariable int movieId) {
+	public String addMovieSuccess(ModelMap model, @ModelAttribute @Valid MovieForm movie, @PathVariable int movieId, BindingResult result) {
 		
+		movieValidator.validate(movie, result);
+		if (result.hasErrors()) {
+			List<WebCategory> categoriesList = categoryService.findAll();
+			model.addAttribute("movieForm", movieForm);
+			model.addAttribute("categories", categoriesList);
+			
+			return MOVIES_LIST_EDIT_JSP;
+		}
 		try {
 			WebMovie webMovie = new WebMovie();
 			webMovie.setMovieId(movie.getMovieId());
