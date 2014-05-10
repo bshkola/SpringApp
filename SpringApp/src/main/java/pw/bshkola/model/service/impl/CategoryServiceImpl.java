@@ -32,7 +32,6 @@ public class CategoryServiceImpl implements CategoryService {
 		return webCategoryList;
 	}
 
-
 	@Override
 	@Transactional(rollbackFor = TransactionRollbackException.class)
 	public void save(WebCategory webCategory) throws TransactionRollbackException {
@@ -40,8 +39,6 @@ public class CategoryServiceImpl implements CategoryService {
 		convertFromWeb(webCategory, category);
 		categoryDao.save(category);
 	}
-
-
 
 	@Override
 	@Transactional(rollbackFor = TransactionRollbackException.class)
@@ -51,8 +48,6 @@ public class CategoryServiceImpl implements CategoryService {
 		
 	}
 
-
-
 	@Override
 	@Transactional(rollbackFor = TransactionRollbackException.class)
 	public void update(WebCategory webCategory) throws TransactionRollbackException {
@@ -60,8 +55,6 @@ public class CategoryServiceImpl implements CategoryService {
 		convertFromWeb(webCategory, category);
 		categoryDao.update(category);
 	}
-
-
 
 	@Override
 	@Transactional(rollbackFor = TransactionRollbackException.class)
@@ -76,6 +69,15 @@ public class CategoryServiceImpl implements CategoryService {
 	public WebCategory findById(Integer id) {
 		Category category = categoryDao.findById(id);
 		WebCategory webCategory = new WebCategory();
+		convertToWeb(category, webCategory);
+		return webCategory;
+	}
+	
+	@Override
+	@Transactional(rollbackFor = TransactionRollbackException.class)
+	public WebCategory findByName(String name) {
+		WebCategory webCategory = new WebCategory();
+		Category category = categoryDao.findByName(name);
 		convertToWeb(category, webCategory);
 		return webCategory;
 	}

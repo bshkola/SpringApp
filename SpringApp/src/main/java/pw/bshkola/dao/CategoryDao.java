@@ -3,6 +3,7 @@ package pw.bshkola.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,10 @@ import pw.bshkola.model.service.exceptions.TransactionRollbackException;
 @SuppressWarnings("unchecked")
 public class CategoryDao {
 
+	private static final String NAME = "name";
+	
 	private static final String ALL_QUERY = "from Category c order by c.name";
+	private static final String NAME_QUERY = "from Category c where c.name = :name";
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -52,6 +56,17 @@ public class CategoryDao {
 	public Category findById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
 		return (Category) session.get(Category.class, id);
+	}
+
+	public Category findByName(String name) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(NAME_QUERY);
+		query.setParameter(NAME, name);
+		List<Category> list = query.list();
+		if (list != null && list.size() == 1) {
+			return list.get(0);
+		}
+		return null;
 	}
 
 }

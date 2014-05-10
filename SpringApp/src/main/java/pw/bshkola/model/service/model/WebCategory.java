@@ -1,20 +1,17 @@
 package pw.bshkola.model.service.model;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 
 public class WebCategory {
 
-	private int categoryId;
-	
-	@NotBlank
+	private Integer categoryId;
 	private String name;
 	
-	public int getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 	
@@ -30,6 +27,5 @@ public class WebCategory {
 	public String toString() {
 		return name;
 	}
-
 	
 }

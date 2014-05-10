@@ -17,6 +17,7 @@ import pw.bshkola.form.CategoryForm;
 import pw.bshkola.model.service.CategoryService;
 import pw.bshkola.model.service.exceptions.TransactionRollbackException;
 import pw.bshkola.model.service.model.WebCategory;
+import pw.bshkola.validator.CategoryValidator;
 
 @Controller
 @RequestMapping(value = "/categories")
@@ -35,6 +36,9 @@ public class CategoryController {
 	@Autowired
 	private CategoryForm categoryForm;
 	
+	@Autowired
+	private CategoryValidator categoryValidator;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showCategoriesList(ModelMap model) {
 		
@@ -48,8 +52,7 @@ public class CategoryController {
 	public String addCategory(ModelMap model) {
 
 		categoryForm.clear();
-		categoryForm.setCategoryId(0);
-		model.addAttribute("category", categoryForm);
+		model.addAttribute("categoryForm", categoryForm);
 		
 		return CATEGORIES_LIST_ADD_JSP;
 	}
@@ -57,15 +60,15 @@ public class CategoryController {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public String addCategorySuccess(ModelMap model, @ModelAttribute @Valid CategoryForm category, BindingResult result) {
 		
+		categoryValidator.validate(category, result);
 		if (result.hasErrors()) {
-			model.addAttribute("category", category);
+			model.addAttribute("categoryForm", category);
 
 			return CATEGORIES_LIST_ADD_JSP;
 		}
 		
 		try {
 			WebCategory webCategory = new WebCategory();
-			webCategory.setCategoryId(category.getCategoryId());
 			webCategory.setName(category.getName());
 			
 			categoryService.save(webCategory);
@@ -85,12 +88,18 @@ public class CategoryController {
 		categoryForm.setCategoryId(category.getCategoryId());
 		categoryForm.setName(category.getName());
 		
-		model.addAttribute("category", categoryForm);
+		model.addAttribute("categoryForm", categoryForm);
 		return CATEGORIES_LIST_EDIT_JSP;
 	}
 	
 	@RequestMapping(value = "edit/{category_id}", method = RequestMethod.POST)
-	public String editCategorySuccess(ModelMap model, @ModelAttribute CategoryForm category, @PathVariable Integer category_id) {
+	public String editCategorySuccess(ModelMap model, @ModelAttribute @Valid CategoryForm category, @PathVariable Integer category_id, BindingResult result) {
+		
+		categoryValidator.validate(category, result);
+		if (result.hasErrors()) {
+			model.addAttribute("categoryForm", category);
+			return CATEGORIES_LIST_EDIT_JSP;
+		}
 		
 		try {
 			WebCategory webCategory = new WebCategory();

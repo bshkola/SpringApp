@@ -4,13 +4,15 @@
 <html>
 <body>
 	<h1>Edit category page</h1>
-	<form:form method="POST" action="" commandName="category">
+	<form:form method="POST" action="" commandName="categoryForm">
 		<form:hidden path="categoryId"/>
+		<form:errors path="*" class="errorblock" element="div" />
 		<table>
 			<tr>
 				<td><form:label path="name">Name:</form:label></td>
 				<td><form:input path="name"/></td>
-			</tr>	
+				<td><form:errors path="name" class="error"/> </td>
+			</tr>
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="Edit category">

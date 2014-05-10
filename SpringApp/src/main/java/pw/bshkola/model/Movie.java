@@ -18,13 +18,13 @@ public class Movie {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "movie_seq")
 	@SequenceGenerator(name = "movie_seq", sequenceName = "movie_seq")
 	@Column(name = "movie_id")
-	private int movieId;
+	private Integer movieId;
 	
 	@Column(name = "name")
 	private String name;
 	
 	@Column(name = "release_year")
-	private int releaseYear;
+	private Integer releaseYear;
 	
 	@Column(name = "description")
 	private String description;
@@ -36,19 +36,19 @@ public class Movie {
 	public Movie() {
 	}
 
-	public Movie(int movieId, String name, int releaseYear, String description, Category category) {
-		this.setMovieId(movieId);
+	public Movie(Integer movieId, String name, Integer releaseYear, String description, Category category) {
+		this.movieId = movieId;
 		this.name = name;
 		this.releaseYear = releaseYear;
 		this.description = description;
 		this.category = category;
 	}
 
-	public int getMovieId() {
+	public Integer getMovieId() {
 		return movieId;
 	}
 	
-	public void setMovieId(int movieId) {
+	public void setMovieId(Integer movieId) {
 		this.movieId = movieId;
 	}
 
@@ -60,11 +60,11 @@ public class Movie {
 		this.name = name;
 	}
 
-	public int getReleaseYear() {
+	public Integer getReleaseYear() {
 		return releaseYear;
 	}
 
-	public void setReleaseYear(int releaseYear) {
+	public void setReleaseYear(Integer releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 

@@ -2,17 +2,17 @@ package pw.bshkola.model.service.model;
 
 public class WebMovie {
 	
-	private int movieId;
+	private Integer movieId;
 	private String name;
-	private int releaseYear;
+	private Integer  releaseYear;
 	private String description;
 	private WebCategory category;
 	
-	public int getMovieId() {
+	public Integer getMovieId() {
 		return movieId;
 	}
 	
-	public void setMovieId(int movieId) {
+	public void setMovieId(Integer movieId) {
 		this.movieId = movieId;
 	}
 
@@ -24,7 +24,7 @@ public class WebMovie {
 		this.name = name;
 	}
 
-	public int getReleaseYear() {
+	public Integer getReleaseYear() {
 		return releaseYear;
 	}
 

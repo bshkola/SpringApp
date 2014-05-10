@@ -21,14 +21,14 @@
 
 <body>
 	<h1>Add category page</h1>
-	<form:form method="POST" action="add" commandName="category">
+	<form:form method="POST" action="add" commandName="categoryForm">
 		<form:hidden path="categoryId"/>
-		<form:errors path="*" cssClass="errorblock" element="div" />
+		<form:errors path="*" class="errorblock" element="div" />
 		<table>
 			<tr>
 				<td><form:label path="name">Name:</form:label></td>
 				<td><form:input path="name"/></td>
-				<td><form:errors path="name" cssClass="error"/> </td>
+				<td><form:errors path="name" class="error"/> </td>
 			</tr>	
 			<tr>
 				<td colspan="2">

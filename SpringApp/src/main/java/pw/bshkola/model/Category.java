@@ -21,7 +21,7 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "category_seq")
 	@SequenceGenerator(name = "category_seq", sequenceName = "category_seq")
 	@Column(name = "category_id")
-	private int categoryId;
+	private Integer categoryId;
 	
 	@Column(name = "name")
 	private String name;
@@ -32,16 +32,16 @@ public class Category {
 	public Category() {
 	}
 	
-	public Category(int categoryId, String name) {
-		this.setCategoryId(categoryId);
+	public Category(Integer categoryId, String name) {
+		this.categoryId = categoryId;
 		this.name = name;
 	}
 
-	public int getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 	
