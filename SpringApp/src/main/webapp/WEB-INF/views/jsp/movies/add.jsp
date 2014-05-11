@@ -1,5 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ include file="../templates/taglibs.jsp" %>
 
 <html>
 
@@ -25,27 +24,27 @@
 			<form:errors path="*" cssClass="errorblock" element="div" />
 			<table>
 				<tr>
-					<td><form:label path="name">Name:</form:label></td>
+					<td><form:label path="name"><spring:message code="movie.name"/>:</form:label></td>
 					<td><form:input path="name"/></td>
 					<td><form:errors path="name" cssClass="error"/> </td>
 				</tr>	
 				<tr>
-					<td><form:label path="releaseYear">Year:</form:label></td>
+					<td><form:label path="releaseYear"><spring:message code="movie.releaseYear"/>:</form:label></td>
 					<td><form:input path="releaseYear"/></td>
 					<td><form:errors path="releaseYear" cssClass="error"/> </td>
 				</tr>
 				<tr>
-					<td><form:label path="description">Description:</form:label></td>
+					<td><form:label path="description"><spring:message code="movie.description"/>:</form:label></td>
 					<td><form:textarea path="description" cols="75" rows="5"/></td>
 				</tr>
 				<tr>
 					<td>
-						<form:label path="category">Category:</form:label>
+						<form:label path="category"><spring:message code="movie.category"/>:</form:label>
 					</td>
 					<td>
 						<c:choose>
 							<c:when test="${empty categories}">
-								Add category first
+								<spring:message code="categories.noCategory"/>
 							</c:when>
 							<c:otherwise>
 								<form:select path="category" id="category" class="w300">
@@ -57,7 +56,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" value="Add category"
+						<input type="submit" value="<spring:message code="movie.add"/>"
 							${empty categories ? 'disabled="disabled"' : ''}
 						/>
 					</td>
@@ -66,6 +65,6 @@
 		</fieldset>
 	</form:form>
 	<br>
-	<a href="http://localhost:8080/SpringApp/categories">Go back to categories</a>
+	<a href="<spring:message code="system.baseUrl"/>/categories">Go back to categories</a>
 </body>
 </html>

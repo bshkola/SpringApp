@@ -52,7 +52,12 @@
 	</bean>
 	
 	<bean class="org.springframework.context.support.ResourceBundleMessageSource" id="messageSource">
-		<property name="basename" value="messages"/>
+		<property name="basenames">
+			<list>
+				<value>messages</value>
+				<value>config</value>
+			</list>
+		</property>
 	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>

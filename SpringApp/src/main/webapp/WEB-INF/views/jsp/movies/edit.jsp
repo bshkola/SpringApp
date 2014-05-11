@@ -1,5 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ include file="../templates/taglibs.jsp" %>
 
 <html>
 <body>
@@ -46,6 +45,6 @@
 		</fieldset>
 	</form:form>
 	<br>
-	<a href="http://localhost:8080/SpringApp/categories">Go back to categories</a>
+	<a href="<spring:message code="system.baseUrl"/>/categories">Go back to categories</a>
 </body>
 </html>

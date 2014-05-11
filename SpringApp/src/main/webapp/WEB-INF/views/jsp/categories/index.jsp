@@ -1,21 +1,21 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="../templates/taglibs.jsp" %>
 
 <html>
 <body>
-	<h2>Choose the category:</h2>
+	<h2><spring:message code="categories.categories"/></h2>
 	
 	<table>
 		<c:if test="${not empty categoriesList}">
 			<thead>
 				<tr>
-					<td><b>Category:</b></td>
+					<td><b><spring:message code="categories.category"/>:</b></td>
 					<td></td>
 					<td></td>
 				</tr>
 			</thead>
 			<tr>
 				<td>
-					<a href="http://localhost:8080/SpringApp/movies/all">All categories</a>
+					<a href="<spring:message code="system.baseUrl"/>/movies/all"><spring:message code="categories.allCategories"/></a>
 				</td>
 			</tr>
 		</c:if>
@@ -23,21 +23,21 @@
 		<c:forEach var="categoryItem" items="${categoriesList}">
 			<tr>
 				<td>
-					<a href="http://localhost:8080/SpringApp/movies/${categoryItem.name}">${categoryItem.name}</a>
+					<a href="<spring:message code="system.baseUrl"/>/movies/${categoryItem.name}">${categoryItem.name}</a>
 				</td>
 				<td>
-					<a href="http://localhost:8080/SpringApp/categories/edit/${categoryItem.categoryId}">edit</a>
+					<a href="<spring:message code="system.baseUrl"/>/categories/edit/${categoryItem.categoryId}"><spring:message code="categories.edit"/></a>
 				</td>
 				<td>
-					<a href="http://localhost:8080/SpringApp/categories/delete/${categoryItem.categoryId}">delete</a>
+					<a href="<spring:message code="system.baseUrl"/>/categories/delete/${categoryItem.categoryId}"><spring:message code="categories.delete"/></a>
 				</td>
 			</tr>
 		</c:forEach>
 	</table>
 	
-	<a href="http://localhost:8080/SpringApp/categories/add">Add new category</a>
+	<a href="<spring:message code="system.baseUrl"/>/categories/add"><spring:message code="categories.addNew"/></a>
 	<br>
-	<a href="http://localhost:8080/SpringApp/movies/add">Add new movie</a>
+	<a href="<spring:message code="system.baseUrl"/>/movies/add"><spring:message code="movies.addNew"/></a>
 	
 </body>
 </html>

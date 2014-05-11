@@ -1,17 +1,17 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../templates/taglibs.jsp" %>
+
 <html>
 <body>
-	<h2>Movies of the category ${categoryName}</h2>
+	<h2><spring:message code="movies.header"/> ${categoryName}</h2>
  
- 	<c:choose> 	
+ 	<c:choose>
 		<c:when test="${not empty moviesList}">
 	 		<table border="1">
 	 			<thead>
 	 				<tr>
-	 					<td><b>Name</b></td>
-	 					<td><b>Release year</b></td>
-	 					<td><b>Description</b></td>
+	 					<td><b><spring:message code="movie.name"/></b></td>
+	 					<td><b><spring:message code="movie.releaseYear"/></b></td>
+	 					<td><b><spring:message code="movie.description"/></b></td>
 	 					<td></td>
 	 					<td></td>
 	 				</tr>
@@ -22,20 +22,20 @@
 						<td>${movieItem.releaseYear}</td>
 						<td>${movieItem.description}</td>
 						<td>
-							<a href="http://localhost:8080/SpringApp/movies/edit/${movieItem.movieId}">edit</a>
+							<a href="<spring:message code="system.baseUrl"/>/movies/edit/${movieItem.movieId}"><spring:message code="movies.edit"/></a>
 						</td>
 						<td>
-							<a href="http://localhost:8080/SpringApp/movies/delete/${movieItem.movieId}">delete</a>
+							<a href="<spring:message code="system.baseUrl"/>/movies/delete/${movieItem.movieId}"><spring:message code="movies.delete"/></a>
 						</td>
 					</tr>
 				</c:forEach>		
 	 		</table>
 		</c:when>
 		<c:otherwise>
-			<h1>You have no movies in this category</h1>
+			<h1><spring:message code="movies.noMovie"/></h1>
 		</c:otherwise>
  	</c:choose>
  	<br>
-	<a href="http://localhost:8080/SpringApp/categories">Go back to categories</a>
+	<a href="<spring:message code="system.baseUrl"/>/categories"><spring:message code="categories.goBack"/></a>
 </body>
 </html>

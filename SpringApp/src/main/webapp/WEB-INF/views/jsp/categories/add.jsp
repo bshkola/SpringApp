@@ -1,7 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
+<%@ include file="../templates/taglibs.jsp" %>
 
 <html>
 
@@ -20,24 +17,23 @@
 </style>
 
 <body>
-	<h1>Add category page</h1>
 	<form:form method="POST" action="add" commandName="categoryForm">
 		<form:hidden path="categoryId"/>
-		<form:errors path="*" class="errorblock" element="div" />
+		<form:errors path="*" class="errorblock" element="div"/>
 		<table>
 			<tr>
-				<td><form:label path="name">Name:</form:label></td>
+				<td><form:label path="name"><spring:message code="category.name"/>:</form:label></td>
 				<td><form:input path="name"/></td>
 				<td><form:errors path="name" class="error"/> </td>
 			</tr>	
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="Add category">
+					<input type="submit" value="<spring:message code="category.add"/>">
 				</td>
 			</tr>			
 		</table>
 	</form:form>
 	<br>
-	<a href="http://localhost:8080/SpringApp/categories"><spring:message code="categories.goBack"/></a>
+	<a href="<spring:message code="system.baseUrl"/>/categories"><spring:message code="categories.goBack"/></a>
 </body>
 </html>

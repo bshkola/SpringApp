@@ -29,7 +29,7 @@ public class MovieValidator implements Validator {
 		MovieForm movieForm = (MovieForm) target;
 		WebMovie webMovie = movieService.findByName(movieForm.getName());
 		if ((webMovie.getMovieId() != null) && (webMovie.getMovieId() != movieForm.getMovieId())) {
-			errors.rejectValue("name", "form.duplicateCategory");
+			errors.rejectValue("name", "form.duplicateMovie");
 		}
 		
 		if (!errors.hasFieldErrors("releaseYear")) {
