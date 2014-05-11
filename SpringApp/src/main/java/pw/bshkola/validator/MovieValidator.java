@@ -31,7 +31,8 @@ public class MovieValidator implements Validator {
 		if ((webMovie.getMovieId() != null) && (webMovie.getMovieId() != movieForm.getMovieId())) {
 			errors.rejectValue("name", "form.duplicateCategory");
 		}
-		if (errors.getFieldErrorCount("releaseYear") == 0) {
+		
+		if (!errors.hasFieldErrors("releaseYear")) {
 			if (movieForm.getReleaseYear() == null || movieForm.getReleaseYear() < 1900 || movieForm.getReleaseYear() > 2030) {
 				errors.rejectValue("releaseYear", "form.outOfReleaseYearRange");
 			}
