@@ -13,6 +13,9 @@
     <mvc:annotation-driven/>
 	<context:component-scan base-package="pw.bshkola" />
 
+	<mvc:resources location="/resources/css/" mapping="/css/**"/>
+	<mvc:resources location="/resources/images/" mapping="/images/**"/>
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">

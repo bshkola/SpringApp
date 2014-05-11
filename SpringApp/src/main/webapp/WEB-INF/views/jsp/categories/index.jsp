@@ -1,6 +1,11 @@
 <%@ include file="../templates/taglibs.jsp" %>
 
 <html>
+<head>
+	<link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
+	<link rel="stylesheet" href="/SpringApp/css/general.css" type="text/css"/>
+</head>
+
 <body>
 	<h2><spring:message code="categories.categories"/></h2>
 	

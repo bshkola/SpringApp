@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+
+body {
+	background: #F7F7F7 url(../images.background.gif) repeat-x center top;
+	font-family: "Tahoma";
+	font-size: 0.9em;
+}
