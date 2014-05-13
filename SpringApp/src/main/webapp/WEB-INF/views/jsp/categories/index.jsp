@@ -1,48 +1,42 @@
 <%@ include file="../templates/taglibs.jsp" %>
+<%
+	final String[] CSS_files = {
+		"categories/style.css",
+	};
+	final String siteTitle = "categories.siteTitle";
+%>
 
-<html>
-<head>
-	<link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
-	<link rel="stylesheet" href="/SpringApp/css/general.css" type="text/css"/>
-</head>
+<%@ include file="../templates/doctype.jsp" %>
 
-<body>
+<%@ include file="../templates/heading.jsp" %>
+
+<%@ include file="../templates/mainMenu.jsp" %>
+
 	<h2><spring:message code="categories.categories"/></h2>
-	
-	<table>
-		<c:if test="${not empty categoriesList}">
-			<thead>
-				<tr>
-					<td><b><spring:message code="categories.category"/>:</b></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</thead>
-			<tr>
-				<td>
-					<a href="<spring:message code="system.baseUrl"/>/movies/all"><spring:message code="categories.allCategories"/></a>
-				</td>
-			</tr>
-		</c:if>
-
+	<div id="category_container">
 		<c:forEach var="categoryItem" items="${categoriesList}">
-			<tr>
-				<td>
-					<a href="<spring:message code="system.baseUrl"/>/movies/${categoryItem.name}">${categoryItem.name}</a>
-				</td>
-				<td>
-					<a href="<spring:message code="system.baseUrl"/>/categories/edit/${categoryItem.categoryId}"><spring:message code="categories.edit"/></a>
-				</td>
-				<td>
-					<a href="<spring:message code="system.baseUrl"/>/categories/delete/${categoryItem.categoryId}"><spring:message code="categories.delete"/></a>
-				</td>
-			</tr>
+				<div class="category_list_item" onClick="javascript:window.location='<spring:message code="system.baseUrl"/>/movies/${categoryItem.name}'">
+					<ul class="category_list_item_options">
+						<li>
+							<a href="<spring:message code="system.baseUrl"/>/categories/edit/${categoryItem.categoryId}"><spring:message code="categories.edit"/></a>
+						</li>
+						<li>
+							<a href="<spring:message code="system.baseUrl"/>/categories/delete/${categoryItem.categoryId}"><spring:message code="categories.delete"/></a>
+						</li>
+					</ul>
+					<div class="category_list_item_name">
+						${categoryItem.name}
+					</div>
+				</div>
 		</c:forEach>
-	</table>
+		<a href="<spring:message code="system.baseUrl"/>/categories/add">
+			<div class="category_list_item">
+				<spring:message code="categories.addNew"/>
+			</div>
+		</a>
+	</div>
 	
-	<a href="<spring:message code="system.baseUrl"/>/categories/add"><spring:message code="categories.addNew"/></a>
-	<br>
-	<a href="<spring:message code="system.baseUrl"/>/movies/add"><spring:message code="movies.addNew"/></a>
-	
-</body>
-</html>
+	<div id="other">
+		<a href="<spring:message code="system.baseUrl"/>/movies/add"><spring:message code="movies.addNew"/></a>
+	</div>
+<%@ include file="../templates/footer.jsp" %>

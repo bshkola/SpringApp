@@ -1,0 +1,40 @@
+@IMPORT url("../general.css");
+
+div#category_container {
+	display: table;
+	width: 100%;
+}
+
+div.category_list_item {
+	float: left;
+	position: relative;
+	width: 25%;
+	height: 200px;
+	background-color: #999999;
+	display:-webkit-box;
+	-webkit-box-pack:center;
+	-webkit-box-align:center;
+}
+
+div.category_list_item:hover {
+	opacity: 0.8;
+}
+
+div#other {
+	
+}
+
+ul.category_list_item_options {
+	font-size: 1em;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	margin: 5px 5px 5px 5px;
+	font-size: 1em;
+	list-style-type: none;
+}
+
+div.category_list_item_name {
+	font-size: 2.5em;
+	font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;s
+}

@@ -1,7 +1,17 @@
 <%@ include file="../templates/taglibs.jsp" %>
+<%
+	final String[] CSS_files = {
+		"categories/style.css",
+	};
+	final String siteTitle = "categories.siteTitle";
+%>
 
-<html>
-<body>
+<%@ include file="../templates/doctype.jsp" %>
+
+<%@ include file="../templates/heading.jsp" %>
+
+<%@ include file="../templates/mainMenu.jsp" %>
+
 	<form:form method="POST" commandName="category">
 		<form:hidden path="categoryId"/>
 		<table>
@@ -18,5 +28,4 @@
 	</form:form>
 	<br>
 	<a href="<spring:message code="system.baseUrl"/>/categories"><spring:message code="categories.goBack"/></a>
-</body>
-</html>
+<%@ include file="../templates/footer.jsp" %>

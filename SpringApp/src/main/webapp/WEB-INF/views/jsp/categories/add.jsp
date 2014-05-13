@@ -1,22 +1,17 @@
 <%@ include file="../templates/taglibs.jsp" %>
+<%
+	final String[] CSS_files = {
+		"categories/style.css",
+	};
+	final String siteTitle = "categories.siteTitle";
+%>
 
-<html>
+<%@ include file="../templates/doctype.jsp" %>
 
-<style>
-.error {
-	color: #ff0000;
-}
- 
-.errorblock {
-	color: #000;
-	background-color: #ffEEEE;
-	border: 3px solid #ff0000;
-	padding: 8px;
-	margin: 16px;
-}
-</style>
+<%@ include file="../templates/heading.jsp" %>
 
-<body>
+<%@ include file="../templates/mainMenu.jsp" %>
+
 	<form:form method="POST" action="add" commandName="categoryForm">
 		<form:hidden path="categoryId"/>
 		<form:errors path="*" class="errorblock" element="div"/>
@@ -25,15 +20,14 @@
 				<td><form:label path="name"><spring:message code="category.name"/>:</form:label></td>
 				<td><form:input path="name"/></td>
 				<td><form:errors path="name" class="error"/> </td>
-			</tr>	
+			</tr>
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="<spring:message code="category.add"/>">
 				</td>
-			</tr>			
+			</tr>
 		</table>
 	</form:form>
 	<br>
 	<a href="<spring:message code="system.baseUrl"/>/categories"><spring:message code="categories.goBack"/></a>
-</body>
-</html>
+<%@ include file="../templates/footer.jsp" %>

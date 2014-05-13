@@ -1,22 +1,17 @@
 <%@ include file="../templates/taglibs.jsp" %>
+<%
+	final String[] CSS_files = {
+		"categories/style.css",
+	};
+	final String siteTitle = "categories.siteTitle";
+%>
 
-<html>
+<%@ include file="../templates/doctype.jsp" %>
 
-<style>
-.error {
-	color: #ff0000;
-}
- 
-.errorblock {
-	color: #000;
-	background-color: #ffEEEE;
-	border: 3px solid #ff0000;
-	padding: 8px;
-	margin: 16px;
-}
-</style>
+<%@ include file="../templates/heading.jsp" %>
 
-<body>
+<%@ include file="../templates/mainMenu.jsp" %>
+
 	<form:form method="POST" action="add" commandName="movieForm">
 		<form:hidden path="movieId"/>
 		<fieldset>
@@ -66,5 +61,4 @@
 	</form:form>
 	<br>
 	<a href="<spring:message code="system.baseUrl"/>/categories">Go back to categories</a>
-</body>
-</html>
+<%@ include file="../templates/footer.jsp" %>

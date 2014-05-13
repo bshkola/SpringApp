@@ -1,7 +1,17 @@
 <%@ include file="../templates/taglibs.jsp" %>
+<%
+	final String[] CSS_files = {
+		"categories/style.css",
+	};
+	final String siteTitle = "categories.siteTitle";
+%>
 
-<html>
-<body>
+<%@ include file="../templates/doctype.jsp" %>
+
+<%@ include file="../templates/heading.jsp" %>
+
+<%@ include file="../templates/mainMenu.jsp" %>
+
 	<form:form method="POST" action="" commandName="movieForm">
 		<fieldset>
 			<legend>Movie to delete</legend>
@@ -38,5 +48,4 @@
 	</form:form>
 	<br>
 	<a href="<spring:message code="system.baseUrl"/>/categories">Go back to categories</a>
-</body>
-</html>
+<%@ include file="../templates/footer.jsp" %>
