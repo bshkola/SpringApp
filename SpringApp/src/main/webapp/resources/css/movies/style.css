@@ -1,0 +1,57 @@
+@IMPORT url("../general.css");
+
+div#movies_container {
+	display: table;
+	width: 100%;
+}
+
+div.movie_list_item {
+	float: left;
+	position: relative;
+	width: 25%;
+	height: 300px;
+	background-color: #BBBBBB;
+	text-align: center;
+}
+
+div.movie_list_item:hover {
+	opacity: 0.8;
+}
+
+ul.movie_list_item_options {
+	font-size: 1em;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	margin: 5px;
+	font-size: 1em;
+	list-style-type: none;
+}
+
+ul.movie_list_item_options li a {
+	color: #000;
+}
+
+div.movie_list_item_name {
+	font-size: 1.5em;
+	font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+	font-weight: bold;
+}
+
+div.image_rect {
+	width: 90%;
+	height: 75%;
+	background-color: #520AB3;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.movie_list_item_metadata {
+	font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+}
+
+div.warning_statement {
+	font-weight: bold;
+	font-size: 2em;
+	text-align: center;
+}

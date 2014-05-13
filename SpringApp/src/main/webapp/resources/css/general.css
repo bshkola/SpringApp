@@ -67,6 +67,11 @@ ul#mainNav li a:hover
 	background-color: #369;
 }
 
+h2.pageTitle {
+	font-size: 2em;
+	text-align: center;
+}
+
 .error {
 	color: #ff0000;
 }

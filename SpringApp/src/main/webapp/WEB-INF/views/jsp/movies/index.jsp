@@ -1,9 +1,9 @@
 <%@ include file="../templates/taglibs.jsp" %>
 <%
 	final String[] CSS_files = {
-		"categories/style.css",
+		"movies/style.css",
 	};
-	final String siteTitle = "categories.siteTitle";
+	final String siteTitle = "movies.siteTitle";
 %>
 
 <%@ include file="../templates/doctype.jsp" %>
@@ -12,37 +12,47 @@
 
 <%@ include file="../templates/mainMenu.jsp" %>
 
-	<h2><spring:message code="movies.header"/> ${categoryName}</h2>
- 
+	<h2 class="pageTitle">
+		<c:choose>
+			<c:when test="${categoryName == 'All categories'}">
+				All movies
+			</c:when>
+			<c:otherwise>
+				${categoryName} movies
+			</c:otherwise>
+		</c:choose>
+	</h2>
+
  	<c:choose>
 		<c:when test="${not empty moviesList}">
-	 		<table border="1">
-	 			<thead>
-	 				<tr>
-	 					<td><b><spring:message code="movie.name"/></b></td>
-	 					<td><b><spring:message code="movie.releaseYear"/></b></td>
-	 					<td><b><spring:message code="movie.description"/></b></td>
-	 					<td></td>
-	 					<td></td>
-	 				</tr>
-	 			</thead>
-		 		<c:forEach var="movieItem" items="${moviesList}">
-					<tr>
-						<td>${movieItem.name}</td>
-						<td>${movieItem.releaseYear}</td>
-						<td>${movieItem.description}</td>
-						<td>
-							<a href="<spring:message code="system.baseUrl"/>/movies/edit/${movieItem.movieId}"><spring:message code="movies.edit"/></a>
-						</td>
-						<td>
-							<a href="<spring:message code="system.baseUrl"/>/movies/delete/${movieItem.movieId}"><spring:message code="movies.delete"/></a>
-						</td>
-					</tr>
-				</c:forEach>		
-	 		</table>
+			<div id="movies_container">
+				<c:forEach var="movieItem" items="${moviesList}">
+					<div class="movie_list_item">
+						<ul class="movie_list_item_options">
+							<li>
+								<a href="<spring:message code="system.baseUrl"/>/movies/edit/${movieItem.movieId}"><spring:message code="movies.edit"/></a>
+							</li>
+							<li>
+								<a href="<spring:message code="system.baseUrl"/>/movies/delete/${movieItem.movieId}"><spring:message code="movies.delete"/></a>
+							</li>
+						</ul>
+						<div class="image_rect">
+						</div>
+						<div class="movie_list_item_name">
+							${movieItem.name} (${movieItem.releaseYear})
+						</div>
+						<div class="movie_list_item_metadata">
+							${movieItem.category.name}
+						</div>						
+						<div class="movie_list_item_metadata">
+							${movieItem.description}
+						</div>
+					</div>
+				</c:forEach>
+			</div>
 		</c:when>
 		<c:otherwise>
-			<h1><spring:message code="movies.noMovie"/></h1>
+			<div class="warning_statement"><spring:message code="movies.noMovie"/></div>
 		</c:otherwise>
  	</c:choose>
  	<br>
