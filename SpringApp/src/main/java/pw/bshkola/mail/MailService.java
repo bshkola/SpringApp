@@ -22,11 +22,7 @@ public class MailService implements Mail{
 	private JavaMailSender mailSender;
 	
 	@Autowired
-	MessageSource messageSource;
-	
-	public void setMailSender(JavaMailSender mailSender) {
-		this.mailSender = mailSender;
-	}
+	private MessageSource messageSource;
 	
 	@Override
 	public void sendAddingCategoryConfirmation(final Category category) {
