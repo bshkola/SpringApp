@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import pw.bshkola.dao.CategoryDao;
+import pw.bshkola.mail.MailService;
 import pw.bshkola.model.Category;
 import pw.bshkola.model.service.CategoryService;
 import pw.bshkola.model.service.exceptions.TransactionRollbackException;
@@ -18,6 +20,9 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	private CategoryDao categoryDao;
+	
+	@Autowired
+	private MailService mailService;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -38,6 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Category category = new Category();
 		convertFromWeb(webCategory, category);
 		categoryDao.save(category);
+		mailService.sendAddingCategoryConfirmation(category);
 	}
 
 	@Override
