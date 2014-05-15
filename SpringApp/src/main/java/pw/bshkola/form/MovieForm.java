@@ -1,6 +1,8 @@
 package pw.bshkola.form;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Component("movieForm")
 public class MovieForm {
@@ -10,6 +12,7 @@ public class MovieForm {
 	private Integer releaseYear;
 	private String description;
 	private Integer category;
+	private CommonsMultipartFile file;
 	
 	public Integer getMovieId() {
 		return movieId;
@@ -51,6 +54,14 @@ public class MovieForm {
 		this.category = category;
 	}
 
+	public CommonsMultipartFile getFile() {
+		return file;
+	}
+	
+	public void setFile(CommonsMultipartFile file) {
+		this.file = file;
+	}
+	
 	@Override
 	public String toString() {
 		return name + "(" + releaseYear + "), desc: " + description;
@@ -62,6 +73,7 @@ public class MovieForm {
 		setReleaseYear(null);
 		setDescription(null);
 		setCategory(null);
+		setFile(null);
 	}
-	
+
 }

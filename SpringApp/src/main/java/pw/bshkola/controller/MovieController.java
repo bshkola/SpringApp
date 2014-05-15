@@ -1,9 +1,15 @@
 package pw.bshkola.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -32,6 +38,8 @@ public class MovieController {
 	private static final String MOVIES_LIST_ADD_JSP = "movies/add";
 	private static final String MOVIES_LIST_EDIT_JSP = "movies/edit";
 	private static final String MOVIES_LIST_DELETE_JSP = "movies/delete";
+
+	private static final Logger logger = Logger.getLogger(MovieForm.class);
 	
 	@Autowired
 	private MovieService movieService;
@@ -83,6 +91,7 @@ public class MovieController {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public String addMovieSuccess(ModelMap model, @ModelAttribute @Valid MovieForm movie, BindingResult result) {
 		
+		logger.info(movie);
 		movieValidator.validate(movie, result);
 		if (result.hasErrors()) {
 			model.addAttribute("movieForm", movie);
@@ -102,8 +111,26 @@ public class MovieController {
 			webMovie.setCategory(categoryService.findById(movie.getCategory()));
 			
 			movieService.save(webMovie);
+/////////////////////////			
+			byte[] bytes = movie.getFile().getBytes();
+            String rootPath = System.getProperty("catalina.home");
+            File dir = new File(rootPath + File.separator + "tmpFiles");
+            if (!dir.exists())
+                dir.mkdirs();
+
+            // Create the file on server
+            File serverFile = new File(dir.getAbsolutePath()
+                    + File.separator + movie.getFile().getOriginalFilename());
+            BufferedOutputStream stream = new BufferedOutputStream(
+                    new FileOutputStream(serverFile));
+            stream.write(bytes);
+            stream.close();
+/////////////////
+			
 		} catch (TransactionRollbackException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		

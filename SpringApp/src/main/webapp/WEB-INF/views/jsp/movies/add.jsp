@@ -12,7 +12,7 @@
 
 <%@ include file="../templates/mainMenu.jsp" %>
 
-	<form:form method="POST" action="add" commandName="movieForm">
+	<form:form method="POST" action="add" commandName="movieForm" enctype="multipart/form-data">
 		<form:hidden path="movieId"/>
 		<fieldset>
 			<legend>New movie</legend>
@@ -47,6 +47,14 @@
 								</form:select>
 							</c:otherwise>
 						</c:choose>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<form:label path="file">File:</form:label>
+					</td>
+					<td>
+						<form:input type="file" path="file" />
 					</td>
 				</tr>
 				<tr>

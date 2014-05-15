@@ -34,8 +34,12 @@ public class MovieValidator implements Validator {
 		
 		if (!errors.hasFieldErrors("releaseYear")) {
 			if (movieForm.getReleaseYear() == null || movieForm.getReleaseYear() < 1900 || movieForm.getReleaseYear() > 2030) {
-				errors.rejectValue("releaseYear", "form.outOfReleaseYearRange");
+				errors.rejectValue("releaseYear", "form.outOfRange");
 			}
+		}
+		
+		if(movieForm.getFile().getSize() == 0){
+			errors.rejectValue("file", "form.fileUpload");
 		}
 	}
 	
