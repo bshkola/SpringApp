@@ -37,9 +37,9 @@ div.movie_list_item_name {
 	font-weight: bold;
 }
 
-div.image_rect {
-	width: 90%;
-	height: 75%;
+img.image_rect {
+	max-width: 90%;
+	max-height: 75%;
 	background-color: #520AB3;
 	margin-left: auto;
 	margin-right: auto;
