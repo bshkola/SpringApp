@@ -28,6 +28,7 @@
 			<div id="movies_container">
 				<c:forEach var="movieItem" items="${moviesList}">
 					<div class="movie_list_item">
+						<img src='<spring:message code="uploadDir"/>/${imagePath}' alt="image" height="300"/>
 						<ul class="movie_list_item_options">
 							<li>
 								<a href="<spring:message code="system.baseUrl"/>/movies/edit/${movieItem.movieId}"><spring:message code="movies.edit"/></a>

@@ -51,10 +51,10 @@
 				</tr>
 				<tr>
 					<td>
-						<form:label path="file">File:</form:label>
+						<form:label path="image">Image:</form:label>
 					</td>
 					<td>
-						<form:input type="file" path="file" />
+						<form:input type="file" path="image" />
 					</td>
 				</tr>
 				<tr>

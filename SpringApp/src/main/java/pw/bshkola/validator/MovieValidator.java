@@ -1,5 +1,9 @@
 package pw.bshkola.validator;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -15,6 +19,15 @@ public class MovieValidator implements Validator {
 	
 	@Autowired
 	private MovieService movieService;
+	
+	private static final Logger logger = Logger.getLogger(MovieValidator.class);
+
+	private static final List<String> imageExtensionsList = new ArrayList<String>();; 
+	static {
+		imageExtensionsList.add(".jpg");
+		imageExtensionsList.add(".bmp");
+		imageExtensionsList.add(".img");
+	}
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -37,9 +50,23 @@ public class MovieValidator implements Validator {
 				errors.rejectValue("releaseYear", "form.outOfRange");
 			}
 		}
+
+		logger.info("MOVIE:");
+		logger.info(movieForm);
+		logger.info(movieForm.getImage().getSize());
+		logger.info(movieForm.getImage().getName());
+		logger.info(movieForm.getImage().getOriginalFilename());
 		
-		if(movieForm.getFile().getSize() == 0){
-			errors.rejectValue("file", "form.fileUpload");
+		if (movieForm.getImage().getSize() != 0) {
+			boolean extensionCorrect = false;
+			for (String imageExtension : imageExtensionsList) {
+				if (movieForm.getImage().getOriginalFilename().endsWith(imageExtension)) {
+					extensionCorrect = true;
+				}
+			}
+			if (!extensionCorrect) {
+				errors.rejectValue("image", "form.incorrectImageExtension");
+			}
 		}
 	}
 	

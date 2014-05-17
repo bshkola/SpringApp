@@ -1,12 +1,14 @@
 package pw.bshkola.model.service.model;
 
+
 public class WebMovie {
 	
 	private Integer movieId;
 	private String name;
-	private Integer  releaseYear;
+	private Integer releaseYear;
 	private String description;
 	private WebCategory category;
+	private String imagePath;
 	
 	public Integer getMovieId() {
 		return movieId;
@@ -50,7 +52,15 @@ public class WebMovie {
 
 	@Override
 	public String toString() {
-		return name + "(" + releaseYear + "), desc: " + description;
+		return name + "(" + releaseYear + "), desc: " + description + ", src: " + imagePath;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	
 }

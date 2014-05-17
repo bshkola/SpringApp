@@ -2,13 +2,14 @@ package pw.bshkola.controller;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import javax.validation.Valid;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,8 @@ public class MovieController {
 	private static final String MOVIES_LIST_ADD_JSP = "movies/add";
 	private static final String MOVIES_LIST_EDIT_JSP = "movies/edit";
 	private static final String MOVIES_LIST_DELETE_JSP = "movies/delete";
+	
+	private static final String UPLOAD_DIR = "uploadDir";
 
 	private static final Logger logger = Logger.getLogger(MovieForm.class);
 	
@@ -60,7 +63,13 @@ public class MovieController {
 		
 		model.addAttribute("categoryName", "All categories");
 		model.addAttribute(MOVIES_LIST, moviesList);
-
+		
+		logger.info(moviesList.get(0).getImagePath());
+		for (WebMovie webMovie : moviesList) {
+			logger.info(webMovie);
+		}
+		model.addAttribute("imagePath", moviesList.get(0).getImagePath());
+		
 		return MOVIES_LIST_JSP;
 	}
 	
@@ -89,12 +98,12 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String addMovieSuccess(ModelMap model, @ModelAttribute @Valid MovieForm movie, BindingResult result) {
+	public String addMovieSuccess(ModelMap model, @ModelAttribute @Valid MovieForm movieForm, BindingResult result) {
 		
-		logger.info(movie);
-		movieValidator.validate(movie, result);
+		logger.info(movieForm);
+		movieValidator.validate(movieForm, result);
 		if (result.hasErrors()) {
-			model.addAttribute("movieForm", movie);
+			model.addAttribute("movieForm", movieForm);
 			
 			List<WebCategory> categoriesList = categoryService.findAll();
 			model.addAttribute("categories", categoriesList);
@@ -104,36 +113,30 @@ public class MovieController {
 		
 		try {
 			WebMovie webMovie = new WebMovie();
-			webMovie.setMovieId(0);
-			webMovie.setName(movie.getName());
-			webMovie.setReleaseYear(movie.getReleaseYear());
-			webMovie.setDescription(movie.getDescription());
-			webMovie.setCategory(categoryService.findById(movie.getCategory()));
+			webMovie.setName(movieForm.getName());
+			webMovie.setReleaseYear(movieForm.getReleaseYear());
+			webMovie.setDescription(movieForm.getDescription());
+			webMovie.setCategory(categoryService.findById(movieForm.getCategory()));
 			
+			String filename = movieForm.getImage().getOriginalFilename();
+			String filenameWithPath = "C:\\apache-tomcat-7.0.52\\webapps\\uploadDir" + File.separator + filename;
+			
+			File serverFile = new File(filenameWithPath);
+			byte[] bytes = movieForm.getImage().getBytes();
+			BufferedOutputStream stream = new BufferedOutputStream(
+			        new FileOutputStream(serverFile));
+			stream.write(bytes);
+			stream.close();
+			
+			webMovie.setImagePath(filename);
 			movieService.save(webMovie);
-/////////////////////////			
-			byte[] bytes = movie.getFile().getBytes();
-            String rootPath = System.getProperty("catalina.home");
-            File dir = new File(rootPath + File.separator + "tmpFiles");
-            if (!dir.exists())
-                dir.mkdirs();
-
-            // Create the file on server
-            File serverFile = new File(dir.getAbsolutePath()
-                    + File.separator + movie.getFile().getOriginalFilename());
-            BufferedOutputStream stream = new BufferedOutputStream(
-                    new FileOutputStream(serverFile));
-            stream.write(bytes);
-            stream.close();
-/////////////////
-			
 		} catch (TransactionRollbackException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return "redirect:http://localhost:8080/SpringApp/categories/";
 	}
 	

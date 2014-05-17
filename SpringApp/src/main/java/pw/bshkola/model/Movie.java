@@ -29,6 +29,9 @@ public class Movie {
 	@Column(name = "description")
 	private String description;
 	
+	@Column(name = "image_path")
+	private String imagePath;
+	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
@@ -36,12 +39,13 @@ public class Movie {
 	public Movie() {
 	}
 
-	public Movie(Integer movieId, String name, Integer releaseYear, String description, Category category) {
+	public Movie(Integer movieId, String name, Integer releaseYear, String description, Category category, String imagePath) {
 		this.movieId = movieId;
 		this.name = name;
 		this.releaseYear = releaseYear;
 		this.description = description;
 		this.category = category;
+		this.imagePath = imagePath;
 	}
 
 	public Integer getMovieId() {
@@ -82,6 +86,14 @@ public class Movie {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+	
+	public String getImagePath() {
+		return imagePath;
+	}
+	
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	private MovieDao movieDao;
-	
+
 	@Override
 	@Transactional(readOnly = true)
 	public List<WebMovie> findAll() {
@@ -33,7 +33,7 @@ public class MovieServiceImpl implements MovieService {
 		}
 		return webMovieList;
 	}
-	
+
 	@Override
 	@Transactional(rollbackFor = TransactionRollbackException.class)
 	public void save(WebMovie webMovie) throws TransactionRollbackException {
@@ -105,6 +105,7 @@ public class MovieServiceImpl implements MovieService {
 			webMovie.setName(movie.getName());
 			webMovie.setReleaseYear(movie.getReleaseYear());
 			webMovie.setDescription(movie.getDescription());
+			webMovie.setImagePath(movie.getImagePath());
 			WebCategory webCategory = new WebCategory();
 			Category category = movie.getCategory();
 			webCategory.setCategoryId(category.getCategoryId());
@@ -119,6 +120,7 @@ public class MovieServiceImpl implements MovieService {
 			movie.setName(webMovie.getName());
 			movie.setReleaseYear(webMovie.getReleaseYear());
 			movie.setDescription(webMovie.getDescription());
+			movie.setImagePath(webMovie.getImagePath());
 			Category category = new Category();
 			WebCategory webCategory = webMovie.getCategory();
 			category.setCategoryId(webCategory.getCategoryId());
