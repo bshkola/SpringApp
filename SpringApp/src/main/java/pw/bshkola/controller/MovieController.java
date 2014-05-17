@@ -40,8 +40,6 @@ public class MovieController {
 	private static final String MOVIES_LIST_EDIT_JSP = "movies/edit";
 	private static final String MOVIES_LIST_DELETE_JSP = "movies/delete";
 	
-	private static final String UPLOAD_DIR = "uploadDir";
-
 	private static final Logger logger = Logger.getLogger(MovieForm.class);
 	
 	@Autowired
@@ -63,12 +61,6 @@ public class MovieController {
 		
 		model.addAttribute("categoryName", "All categories");
 		model.addAttribute(MOVIES_LIST, moviesList);
-		
-		logger.info(moviesList.get(0).getImagePath());
-		for (WebMovie webMovie : moviesList) {
-			logger.info(webMovie);
-		}
-		model.addAttribute("imagePath", moviesList.get(0).getImagePath());
 		
 		return MOVIES_LIST_JSP;
 	}
