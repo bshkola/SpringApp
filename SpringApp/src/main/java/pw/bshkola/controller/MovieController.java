@@ -109,17 +109,20 @@ public class MovieController {
 			webMovie.setReleaseYear(movieForm.getReleaseYear());
 			webMovie.setDescription(movieForm.getDescription());
 			webMovie.setCategory(categoryService.findById(movieForm.getCategory()));
-			
-			String filename = movieForm.getImage().getOriginalFilename();
-			String filenameWithPath = "C:\\apache-tomcat-7.0.52\\webapps\\uploadDir" + File.separator + filename;
-			
-			File serverFile = new File(filenameWithPath);
-			byte[] bytes = movieForm.getImage().getBytes();
-			BufferedOutputStream stream = new BufferedOutputStream(
-			        new FileOutputStream(serverFile));
-			stream.write(bytes);
-			stream.close();
-			
+			String filename = null;
+			if (movieForm.getImage().getSize() != 0) {
+				filename = movieForm.getImage().getOriginalFilename();
+				String filenameWithPath = "C:\\apache-tomcat-7.0.52\\webapps\\uploadDir" + File.separator + filename;
+				
+				File serverFile = new File(filenameWithPath);
+				byte[] bytes = movieForm.getImage().getBytes();
+				BufferedOutputStream stream = new BufferedOutputStream(
+				        new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+			} else {
+				filename = "default.jpg";
+			}
 			webMovie.setImagePath(filename);
 			movieService.save(webMovie);
 		} catch (TransactionRollbackException e) {

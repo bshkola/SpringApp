@@ -51,13 +51,13 @@ public class MovieValidator implements Validator {
 			}
 		}
 
-		logger.info("MOVIE:");
-		logger.info(movieForm);
-		logger.info(movieForm.getImage().getSize());
-		logger.info(movieForm.getImage().getName());
-		logger.info(movieForm.getImage().getOriginalFilename());
-		
-		if (movieForm.getImage().getSize() != 0) {
+//		logger.info("MOVIE:");
+//		logger.info(movieForm);
+//		logger.info(movieForm.getImage().getSize());
+//		logger.info(movieForm.getImage().getName());
+//		logger.info(movieForm.getImage().getOriginalFilename());
+//		
+		if (movieForm.getMovieId() == null && movieForm.getImage().getSize() != 0) {
 			boolean extensionCorrect = false;
 			for (String imageExtension : imageExtensionsList) {
 				if (movieForm.getImage().getOriginalFilename().endsWith(imageExtension)) {
