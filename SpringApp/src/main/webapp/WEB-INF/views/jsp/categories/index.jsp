@@ -16,27 +16,33 @@
 	<div id="category_container">
 		<c:forEach var="categoryItem" items="${categoriesList}">
 			<div class="category_list_item" onClick="javascript:window.location='<spring:message code="system.baseUrl"/>/movies/${categoryItem.name}'">
-				<ul class="category_list_item_options">
-					<li>
-						<a href="<spring:message code="system.baseUrl"/>/categories/edit/${categoryItem.categoryId}"><spring:message code="categories.edit"/></a>
-					</li>
-					<li>
-						<a href="<spring:message code="system.baseUrl"/>/categories/delete/${categoryItem.categoryId}"><spring:message code="categories.delete"/></a>
-					</li>
-				</ul>
+				<sec:authorize access="hasRole('ROLE_USER')">
+					<ul class="category_list_item_options">
+						<li>
+							<a href="<spring:message code="system.baseUrl"/>/categories/edit/${categoryItem.categoryId}"><spring:message code="categories.edit"/></a>
+						</li>
+						<li>
+							<a href="<spring:message code="system.baseUrl"/>/categories/delete/${categoryItem.categoryId}"><spring:message code="categories.delete"/></a>
+						</li>
+					</ul>
+				</sec:authorize>
 				<div class="category_list_item_name">
 					${categoryItem.name}
 				</div>
 			</div>
 		</c:forEach>
-		<a href="<spring:message code="system.baseUrl"/>/categories/add">
-			<div class="category_list_item">
-				<spring:message code="categories.addNew"/>
-			</div>
-		</a>
+		<sec:authorize access="hasRole('ROLE_USER')">
+			<a href="<spring:message code="system.baseUrl"/>/categories/add">
+				<div class="category_list_item">
+					<spring:message code="categories.addNew"/>
+				</div>
+			</a>
+		</sec:authorize>
 	</div>
 	
-	<div id="other">
-		<a href="<spring:message code="system.baseUrl"/>/movies/add"><spring:message code="movies.addNew"/></a>
-	</div>
+	<sec:authorize access="hasRole('ROLE_USER')">
+		<div id="other">
+			<a href="<spring:message code="system.baseUrl"/>/movies/add"><spring:message code="movies.addNew"/></a>
+		</div>
+	</sec:authorize>
 <%@ include file="../templates/footer.jsp" %>

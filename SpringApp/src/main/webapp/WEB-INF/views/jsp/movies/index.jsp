@@ -28,14 +28,16 @@
 			<div id="movies_container">
 				<c:forEach var="movieItem" items="${moviesList}">
 					<div class="movie_list_item">
-						<ul class="movie_list_item_options">
-							<li>
-								<a href="<spring:message code="system.baseUrl"/>/movies/edit/${movieItem.movieId}"><spring:message code="movies.edit"/></a>
-							</li>
-							<li>
-								<a href="<spring:message code="system.baseUrl"/>/movies/delete/${movieItem.movieId}"><spring:message code="movies.delete"/></a>
-							</li>
-						</ul>
+						<sec:authorize access="hasRole('ROLE_USER')">
+							<ul class="movie_list_item_options">
+								<li>
+									<a href="<spring:message code="system.baseUrl"/>/movies/edit/${movieItem.movieId}"><spring:message code="movies.edit"/></a>
+								</li>
+								<li>
+									<a href="<spring:message code="system.baseUrl"/>/movies/delete/${movieItem.movieId}"><spring:message code="movies.delete"/></a>
+								</li>
+							</ul>
+						</sec:authorize>
 						<img class="image_rect" src='<spring:message code="uploadDir"/>/${movieItem.imagePath}' alt="image" height="300"/>
 						<div class="movie_list_item_name">
 							${movieItem.name} (${movieItem.releaseYear})

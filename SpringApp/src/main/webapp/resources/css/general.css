@@ -83,3 +83,26 @@ h2.pageTitle {
 	padding: 8px;
 	margin: 16px;
 }
+
+div#loginSpace {
+	float: right;
+}
+
+input.loginInput {
+	font: 12px Verdana,Arial,sans-serif;
+	width: 70px;
+}
+
+div#username {
+	color: #FFFF00;
+}
+
+#loginBox {
+	width: 300px;
+	padding: 20px;
+	margin: 100px auto;
+	background: #fff;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border: 1px solid #000;
+}

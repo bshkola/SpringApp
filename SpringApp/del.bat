@@ -1,0 +1,1 @@
+rmdir /s /q C:\apache-tomcat-7.0.52\webapps\SpringApp
